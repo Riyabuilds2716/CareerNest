@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CareerNest - Help & Contact</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .help-page {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .help-hero {
+            background: #eaf2f8;
+            padding: 40px;
+            border-left: 6px solid #1f4e79;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .help-hero h1 {
+            color: #1f4e79;
+            font-size: 40px;
+            margin-top: 0;
+        }
+
+        .help-hero p {
+            color: #444;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .help-section {
+            background: white;
+            padding: 30px 35px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+            text-align: left;
+        }
+
+        .help-section h2 {
+            color: #1f4e79;
+            font-size: 27px;
+            margin-top: 0;
+            border-bottom: 2px solid #eaf2f8;
+            padding-bottom: 10px;
+        }
+
+        .help-section p {
+            color: #444;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background: #f5f7fa;
+            padding: 22px;
+            border-radius: 8px;
+            border-top: 4px solid #1f4e79;
+        }
+
+        .contact-card h3 {
+            color: #1f4e79;
+            margin-top: 0;
+        }
+
+        .faq {
+            margin-bottom: 18px;
+        }
+
+        .faq h3 {
+            color: #1f4e79;
+            margin-bottom: 6px;
+        }
+
+        .faq p {
+            margin-top: 0;
+        }
+
+        .help-list {
+            padding-left: 25px;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        .help-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .help-form label {
+            margin-top: 15px;
+            margin-bottom: 6px;
+            color: #1f4e79;
+            font-weight: bold;
+        }
+
+        .help-form input,
+        .help-form textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .help-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .help-form button {
+            width: 150px;
+            margin-top: 20px;
+        }
+
+        .support-note {
+            background: #1f4e79;
+            color: white;
+            padding: 28px 35px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .support-note h2 {
+            margin-top: 0;
+            color: white;
+        }
+
+        .support-note p {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .help-page {
+                width: 94%;
+            }
+
+            .help-hero {
+                padding: 30px;
+            }
+
+            .help-hero h1 {
+                font-size: 32px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/about">About</a>
+    <a href="/help">Help & Contact</a>
+    <a href="/register">Job Seeker</a>
+    <a href="/login">Login</a>
+</nav>
+
+
+<!-- Help & Contact Page -->
+<div class="help-page">
+
+    <!-- Hero Section -->
+    <section class="help-hero">
+
+        <h1>📞 Help & Contact</h1>
+
+        <p>
+            Welcome to the CareerNest Help & Contact page.
+            If you have any questions or need assistance while using
+            our platform, we are here to help.
+        </p>
+
+        <p>
+            You can find answers to common questions below or contact
+            our support team for further assistance.
+        </p>
+
+    </section>
+
+
+    <!-- Frequently Asked Questions -->
+    <section class="help-section">
+
+        <h2>❓ Frequently Asked Questions</h2>
+
+        <div class="faq">
+            <h3>How can I search for a job?</h3>
+            <p>
+                Go to the Jobs page and explore available job listings.
+                You can view job details and required skills.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>How can I register as a job seeker?</h3>
+            <p>
+                Click on Job Seeker in the navigation bar and complete
+                the registration form.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>How can I view complete job details?</h3>
+            <p>
+                Click the View Job button on any job listing to see
+                complete information about that opportunity.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>What if I need further help?</h3>
+            <p>
+                You can contact us using the support information or
+                send a message through the contact form below.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- Contact Information -->
+    <section class="help-section">
+
+        <h2>📧 Contact Information</h2>
+
+        <div class="contact-container">
+
+            <div class="contact-card">
+                <h3>📧 Email Support</h3>
+                <p>
+                    Email: support@jobportal.com
+                </p>
+                <p>
+                    Send us your questions or queries.
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <h3>📱 Phone Support</h3>
+                <p>
+                    Phone: +91 98765 43210
+                </p>
+                <p>
+                    Contact our support team for assistance.
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <h3>📍 Location</h3>
+                <p>
+                    Mumbai, Maharashtra, India
+                </p>
+                <p>
+                    Our support team is available online.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Quick Help -->
+    <section class="help-section">
+
+        <h2>💡 Quick Help</h2>
+
+        <ul class="help-list">
+            <li>Check the Jobs page for available opportunities.</li>
+            <li>Read the complete job details before applying.</li>
+            <li>Keep your registration information accurate.</li>
+            <li>Use the Login page to access your account.</li>
+            <li>Contact support if you face any problem.</li>
+        </ul>
+
+    </section>
+  <!-- Contact Form -->
+    <section class="help-section">
+
+        <h2>📝 Contact / Message Form</h2>
+
+        <p>
+            Have a question or need assistance? Send us a message
+            using the form below.
+        </p>
+
+        <form class="help-form" method="POST">
+
+            <label for="name">Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="subject">Subject</label>
+            <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Enter your subject"
+                required
+            >
+
+            <label for="message">Message</label>
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Write your message"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Safety & Privacy -->
+    <section class="help-section">
+
+        <h2>🔐 Safety & Privacy Tips</h2>
+
+        <ul class="help-list">
+            <li>Never share your account password with anyone.</li>
+            <li>Verify job information before sharing personal details.</li>
+            <li>Be careful of suspicious job offers or requests for money.</li>
+            <li>Use accurate information while creating your account.</li>
+        </ul>
+
+    </section>
+
+
+    <!-- Support Commitment -->
+    <section class="support-note">
+
+        <h2>🤝 Our Support Commitment</h2>
+
+        <p>
+            We aim to provide a simple and helpful experience for every
+            CareerNest user. Our goal is to make it easier for job seekers
+            to find information, explore opportunities and get assistance
+            whenever they need it.
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 CareerNest | Help & Contact</p>
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>  

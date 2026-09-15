@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile - CareerNest</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #0b2d4d;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #b9d9f5;
+        }
+
+        /* ================= FORM ================= */
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            margin: 50px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b1f3a;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #123c69;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .readonly {
+            background: #eeeeee;
+            cursor: not-allowed;
+        }
+
+        .buttons {
+            margin-top: 28px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button,
+        .back-btn {
+            flex: 1;
+            padding: 13px;
+            border-radius: 7px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            background: #123c69;
+            color: white;
+        }
+
+        button:hover {
+            background: #0b2d50;
+        }
+
+        .back-btn {
+            background: #e5e7eb;
+            color: #222;
+        }
+
+        .back-btn:hover {
+            background: #d1d5db;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 80px;
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            .container {
+                width: 85%;
+                padding: 25px;
+                margin: 30px auto;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            CareerNest
+        </div>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/jobs">Jobs</a>
+
+            <a href="/about">About</a>
+
+            <a href="/help">Help & Contact</a>
+
+            <a href="/profile">My Profile</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= EDIT PROFILE ================= -->
+
+    <div class="container">
+
+        <h1>✏️ Edit Profile</h1>
+
+        <form method="POST">
+
+            <label for="full_name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                value="{{ profile['full_name'] }}"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                value="{{ profile['email'] }}"
+                class="readonly"
+                readonly
+            >
+
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                id="phone"
+                name="phone"
+                value="{{ profile['phone'] or '' }}"
+            >
+
+
+            <label for="qualification">
+                Qualification
+            </label>
+
+            <input
+                type="text"
+                id="qualification"
+                name="qualification"
+                value="{{ profile['qualification'] or '' }}"
+            >
+
+
+            <label for="skills">
+                Skills
+            </label>
+
+            <textarea
+                id="skills"
+                name="skills"
+                placeholder="Enter your skills"
+            >{{ profile['skills'] or '' }}</textarea>
+
+
+            <div class="buttons">
+
+                <button type="submit">
+                    💾 Save Changes
+                </button>
+
+                <a
+                    href="{{ url_for('profile') }}"
+                    class="back-btn"
+                >
+                    ← Back to Profile
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 CareerNest. All Rights Reserved.
+
+    </footer>
+
+</body>
+
+</html>

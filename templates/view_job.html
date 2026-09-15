@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Job | CareerNest Admin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        nav {
+            background: #0b2d4d;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #b9d9f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 50px auto;
+        }
+
+        .job-card {
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #0b2d4d;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .company {
+            color: #667085;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            margin-bottom: 22px;
+        }
+
+        .info h3 {
+            color: #0b2d4d;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 11px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .back {
+            background: #0b2d4d;
+            color: white;
+        }
+
+        .back:hover {
+            background: #082238;
+        }
+
+        .edit {
+            background: #fff4d6;
+            color: #8a6200;
+        }
+
+        .edit:hover {
+            background: #ffedbd;
+        }
+
+        footer {
+            margin-top: 80px;
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .job-card {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            CareerNest Admin
+        </div>
+
+        <a href="/manage-jobs">
+            Manage Jobs
+        </a>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="job-card">
+
+            <!-- Job Name -->
+            <h1>
+                {{ job[1] }}
+            </h1>
+
+            <!-- Company + Location -->
+            <div class="company">
+                {{ job[2] }} • {{ job[3] }}
+            </div>
+
+            <!-- Job Title -->
+            <div class="info">
+
+                <h3>Job Title</h3>
+
+                <p>
+                    {{ job[1] }}
+                </p>
+
+            </div>
+
+            <!-- Company -->
+            <div class="info">
+
+                <h3>Company</h3>
+
+                <p>
+                    {{ job[2] }}
+                </p>
+
+            </div>
+
+            <!-- Location -->
+            <div class="info">
+
+                <h3>Location</h3>
+
+                <p>
+                    {{ job[3] }}
+                </p>
+
+            </div>
+
+            <!-- Required Skills -->
+            <div class="info">
+
+                <h3>Required Skills</h3>
+
+                <p>
+                    {{ job[4] }}
+                </p>
+
+            </div>
+
+            <!-- Job Description -->
+            <div class="info">
+
+                <h3>Job Description</h3>
+
+                <p>
+                    {{ job[5] }}
+                </p>
+
+            </div>
+            <div class="buttons">
+
+                <a href="/manage-jobs" class="btn back">
+                    ← Back to Manage Jobs
+                </a>
+
+                <a href="/edit-job/{{ job[0] }}" class="btn edit">
+                    Edit Job
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

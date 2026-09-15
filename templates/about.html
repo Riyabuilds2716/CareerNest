@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CareerNest - About Us</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .about-page {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 45px 0;
+        }
+
+        .about-hero {
+            background: #eaf2f8;
+            padding: 45px;
+            border-left: 6px solid #1f4e79;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .about-hero h1 {
+            color: #1f4e79;
+            font-size: 42px;
+            margin: 0 0 15px;
+        }
+
+        .about-hero p {
+            color: #444;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 900px;
+        }
+
+        .about-section {
+            background: white;
+            padding: 30px 35px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            text-align: left;
+        }
+
+        .about-section h2 {
+            color: #1f4e79;
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eaf2f8;
+            padding-bottom: 8px;
+        }
+
+        .about-section p {
+            color: #444;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .about-list {
+            padding-left: 25px;
+            color: #444;
+            line-height: 1.9;
+        }
+
+        .about-list li {
+            margin-bottom: 7px;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: #f5f7fa;
+            padding: 22px;
+            border-radius: 8px;
+            border-top: 4px solid #1f4e79;
+        }
+
+        .feature-card h3 {
+            color: #1f4e79;
+            margin-top: 0;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .highlight-section {
+            background: #1f4e79;
+            color: white;
+            padding: 30px 35px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .highlight-section h2 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .highlight-section p {
+            color: white;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .about-page {
+                width: 94%;
+            }
+
+            .about-hero {
+                padding: 30px;
+            }
+
+            .about-hero h1 {
+                font-size: 32px;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/about">About</a>
+    <a href="/help">Help & Contact</a>
+    <a href="/register">Job Seeker</a>
+    <a href="/login">Login</a>
+</nav>
+
+
+<div class="about-page">
+
+    <section class="about-hero">
+
+        <h1>About CareerNest</h1>
+
+        <p>
+            Welcome to CareerNest, a professional platform designed to
+            connect job seekers with suitable career opportunities.
+            Our goal is to make the job search process simple, convenient
+            and accessible for everyone.
+        </p>
+
+        <p>
+            Whether you are a student, fresher or an experienced professional,
+            Job Portal helps you explore opportunities and take the next step
+            in your career.
+        </p>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>About Us</h2>
+
+        <p>
+            Job Portal is an online job search platform created to make
+            finding employment opportunities easier and more organized.
+            Users can explore available jobs, view job details and discover
+            opportunities based on their interests and skills.
+        </p>
+
+        <p>
+            We focus on providing a clean, simple and user-friendly
+            experience so that job seekers can easily find useful
+            career information in one place.
+        </p>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>Our Mission</h2>
+
+        <p>
+            Our mission is to simplify the job search process and help
+            job seekers discover opportunities that match their skills,
+            interests and career goals.
+        </p>
+
+        <ul class="about-list">
+            <li>Make job searching simple and convenient.</li>
+            <li>Help students and freshers discover opportunities.</li>
+            <li>Provide clear and useful job information.</li>
+            <li>Create a professional and user-friendly platform.</li>
+        </ul>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>What We Provide</h2>
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <h3>🔎 Job Search</h3>
+                <p>
+                    Search for jobs using job titles, skills and locations.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>💼 Job Listings</h3>
+                <p>
+                    Explore different job opportunities and available
+                    positions.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📄 Job Details</h3>
+                <p>
+                    View company, location, job type and required skills.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>👤 Job Seeker</h3>
+                <p>
+                    Register as a job seeker and access the platform.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🔐 Login</h3>
+                <p>
+                    Access your account through the login system.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📈 Career Opportunities</h3>
+                <p>
+                    Discover opportunities that support your career growth.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>Who We Help</h2>
+
+        <ul class="about-list">
+            <li>Students looking for their first job opportunity.</li>
+            <li>Freshers starting their professional careers.</li>
+            <li>Job seekers searching for suitable positions.</li>
+            <li>Professionals looking for new career opportunities.</li>
+        </ul>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>Our Goals</h2>
+
+        <p>
+            Our goal is to create a reliable platform where users can
+            easily explore job opportunities and access useful information.
+            We aim to continuously improve the platform and provide a
+            better experience for both job seekers and employers.
+        </p>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>Why Choose Job Portal?</h2>
+
+        <ul class="about-list">
+            <li>Simple and easy-to-use interface.</li>
+            <li>Professional job search experience.</li>
+            <li>Suitable for students and freshers.</li>
+            <li>Easy access to important job information.</li>
+            <li>Job opportunities available in different categories.</li>
+        </ul>
+
+    </section>
+
+
+    <section class="highlight-section">
+
+        <h2>Our Commitment</h2>
+
+        <p>
+            We are committed to providing a simple, organized and
+            user-friendly job search experience. We aim to make career
+            opportunities easier to discover and help users move closer
+            to their professional goals.
+        </p>
+
+    </section>
+
+
+    <section class="about-section">
+
+        <h2>Our Vision</h2>
+
+        <p>
+            Our vision is to build a reliable and professional job platform
+            where job seekers can confidently explore opportunities and
+            companies can connect with suitable talent.
+        </p>
+
+    </section>
+
+</div>
+
+
+<footer>
+    <p>© 2026 CareerNest| Help & Contact</p>
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

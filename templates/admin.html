@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Job Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+        }
+
+        /* =========================
+           Navbar
+        ========================= */
+
+        nav {
+            background: #0b1f3a;
+            padding: 17px 6%;
+            display: flex;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin-right: auto;
+            font-size: 23px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a9d3ff;
+        }
+
+        /* =========================
+           Header
+        ========================= */
+
+        .dashboard-header {
+            background: white;
+            padding: 35px 6%;
+            border-bottom: 1px solid #dce6f2;
+        }
+
+        .dashboard-header h1 {
+            color: #0b1f3a;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* =========================
+           Main
+        ========================= */
+
+        .container {
+            width: 88%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        .section-title {
+            color: #0b1f3a;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           Statistics
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #dce6f2;
+            box-shadow: 0 7px 22px rgba(11, 31, 58, 0.08);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(11, 31, 58, 0.13);
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h3 {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            color: #0b4f8a;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           Management Section
+        ========================= */
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .management-card {
+            background: white;
+            border: 1px solid #dce6f2;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 7px 22px rgba(11, 31, 58, 0.08);
+            transition: 0.3s;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .management-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(11, 31, 58, 0.13);
+        }
+
+        .management-card .icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .management-card h3 {
+            color: #0b1f3a;
+            margin-bottom: 9px;
+            font-size: 18px;
+        }
+
+        .management-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .manage-btn {
+            display: inline-block;
+            background: #0b4f8a;
+            color: white;
+            text-decoration: none;
+            padding: 10px 17px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .manage-btn:hover {
+            background: #083b68;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           Quick Actions
+        ========================= */
+
+        .quick-section {
+            background: white;
+            border: 1px solid #dce6f2;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 7px 22px rgba(11, 31, 58, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .quick-section h2 {
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .quick-section p {
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .quick-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            background: #eef5fc;
+            color: #0b4f8a;
+            border: 1px solid #c9dff3;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .quick-btn:hover {
+            background: #dcecfb;
+        }
+
+        /* =========================
+           Jobs Overview
+        ========================= */
+
+        .jobs-overview {
+            background: white;
+            border: 1px solid #dce6f2;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 7px 22px rgba(11, 31, 58, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .jobs-overview h2 {
+            color: #0b1f3a;
+            margin-bottom: 8px;
+        }
+
+        .jobs-overview p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .job-count {
+            margin-top: 18px;
+            background: #f5f9fe;
+            border-left: 4px solid #0b4f8a;
+            padding: 17px;
+            border-radius: 7px;
+            color: #334155;
+        }
+
+        .job-count strong {
+            color: #0b4f8a;
+            font-size: 20px;
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            background: #0b1f3a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark-mode {
+            background: #121212;
+            color: #f5f5f5;
+        }
+
+        body.dark-mode .dashboard-header {
+            background: #1e1e1e;
+            border-bottom-color: #333;
+        }
+
+        body.dark-mode .dashboard-header h1 {
+            color: #ffffff;
+        }
+
+        body.dark-mode .dashboard-header p {
+            color: #cccccc;
+        }
+
+        body.dark-mode .section-title {
+            color: #ffffff;
+        }
+
+        body.dark-mode .stat-card,
+        body.dark-mode .management-card,
+        body.dark-mode .quick-section,
+        body.dark-mode .jobs-overview {
+            background: #1e1e1e;
+            border-color: #333;
+            color: #f5f5f5;
+        }
+
+        body.dark-mode .stat-card h3,
+        body.dark-mode .management-card p,
+        body.dark-mode .quick-section p,
+        body.dark-mode .jobs-overview p {
+            color: #cccccc;
+        }
+
+        body.dark-mode .management-card h3,
+        body.dark-mode .quick-section h2,
+        body.dark-mode .jobs-overview h2 {
+            color: #7db7e8;
+        }
+
+        body.dark-mode .stat-card .number {
+            color: #7db7e8;
+        }
+
+        body.dark-mode .quick-btn {
+            background: #26384a;
+            color: #9ac8ee;
+            border-color: #40566d;
+        }
+
+        body.dark-mode .quick-btn:hover {
+            background: #31485e;
+        }
+
+        body.dark-mode .job-count {
+            background: #252525;
+            color: #dddddd;
+            border-left-color: #4f8fc4;
+        }
+
+        body.dark-mode .job-count strong {
+            color: #7db7e8;
+        }
+
+        body.dark-mode .stat-card:hover,
+        body.dark-mode .management-card:hover,
+        body.dark-mode .quick-section:hover,
+        body.dark-mode .jobs-overview:hover {
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        /* =========================
+           Responsive
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .management-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav h2 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .dashboard-header {
+                padding: 28px 5%;
+            }
+
+            .dashboard-header h1 {
+                font-size: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <h2>Job Portal</h2>
+
+        <a href="/">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/about">About</a>
+        <a href="/help">Help & Contact</a>
+        <a href="/admin-logout">Logout</a>
+
+    </nav>
+
+    <section class="dashboard-header">
+
+        <h1>Admin Dashboard</h1>
+
+        <p>
+            Welcome to the Job Portal administration panel.
+            Manage jobs, applications, job seekers and messages from one place.
+        </p>
+
+    </section>
+
+    <main class="container">
+
+        <h2 class="section-title">Dashboard Overview</h2>
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <div class="stat-icon">💼</div>
+                <h3>Total Jobs</h3>
+                <div class="number">
+                    {{ total_jobs }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <h3>Total Applications</h3>
+                <div class="number">
+                    {{ total_applications }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <h3>Total Job Seekers</h3>
+                <div class="number">
+                    {{ total_job_seekers }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <h3>Total Messages</h3>
+                <div class="number">
+                    {{ total_messages }}
+                </div>
+            </div>
+
+        </section>
+
+        <h2 class="section-title">
+            Management
+        </h2>
+
+        <section class="management-grid">
+
+            <div class="management-card">
+
+                <div class="icon">💼</div>
+
+                <h3>Manage Jobs</h3>
+
+                <p>
+                    Add new jobs, edit existing job information
+                    and remove jobs from the portal.
+                </p>
+
+                <a href="/manage-jobs" class="manage-btn">
+                    Manage Jobs
+                </a>
+
+            </div>
+
+            <div class="management-card">
+
+                <div class="icon">📋</div>
+
+                <h3>Manage Applications</h3>
+
+                <p>
+                    View job applications and check applicant
+                    information submitted through the portal.
+                </p>
+
+                <a href="/manage-applications" class="manage-btn">
+                    View Applications
+                </a>
+
+            </div>
+
+            <div class="management-card">
+
+                <div class="icon">👤</div>
+
+                <h3>Manage Job Seekers</h3>
+
+                <p>
+                    View registered job seekers and their
+                    qualification and skills information.
+                </p>
+
+                <a href="/manage-job-seekers" class="manage-btn">
+                    View Job Seekers
+                </a>
+
+            </div>
+
+            <div class="management-card">
+
+                <div class="icon">📩</div>
+
+                <h3>Contact Messages</h3>
+
+                <p>
+                    Review messages and inquiries submitted
+                    through the Help & Contact page.
+                </p>
+
+                <a href="/manage-messages" class="manage-btn">
+                    View Messages
+                </a>
+
+            </div>
+
+        </section>
+
+        <section class="quick-section">
+
+            <h2>Quick Actions</h2>
+
+            <p>
+                Quickly access the important administration sections
+                of your Job Portal.
+            </p>
+
+            <div class="quick-buttons">
+
+                <a href="/add-job" class="quick-btn">
+                    ➕ Add New Job
+                </a>
+
+                <a href="/manage-jobs" class="quick-btn">
+                    💼 View All Jobs
+                </a>
+
+                <a href="/manage-applications" class="quick-btn">
+                    📄 View Applications
+                </a>
+
+                <a href="/manage-job-seekers" class="quick-btn">
+                    👥 View Job Seekers
+                </a>
+
+                <a href="/manage-messages" class="quick-btn">
+                    💬 View Messages
+                </a>
+
+            </div>
+
+        </section>
+
+        <section class="jobs-overview">
+
+            <h2>Jobs Overview</h2>
+
+            <p>
+                The Job Portal currently contains job listings
+                available for registered job seekers.
+            </p>
+
+            <div class="job-count">
+
+                Total available jobs:
+                <strong>{{ total_jobs }}</strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 Job Portal | Admin Dashboard
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

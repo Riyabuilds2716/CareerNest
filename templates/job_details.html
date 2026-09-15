@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Details - CareerNest</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/about">About</a>
+    <a href="/help">Help & Contact</a>
+    <a href="/login">Login</a>
+</nav>
+
+
+<section class="job-details">
+
+    <!-- Job Name -->
+    <h1>{{ job[1] }}</h1>
+
+    <!-- Company -->
+    <h3>{{ job[2] }}</h3>
+
+    <!-- Location -->
+    <p>
+        <strong>Location:</strong> {{ job[3] }}
+    </p>
+
+    <!-- Job Type -->
+    <p>
+        <strong>Job Type:</strong> Full Time
+    </p>
+
+    <!-- Salary -->
+    <p>
+        <strong>Salary:</strong> ₹25,000 - ₹40,000 per month
+    </p>
+
+
+    <!-- Job Description -->
+    <h2>Job Description</h2>
+
+    <p>
+        {{ job[5] }}
+    </p>
+
+
+    <!-- Required Skills -->
+    <h2>Required Skills</h2>
+
+    <p>
+        {{ job[4] }}
+    </p>
+
+
+    <!-- Apply Button -->
+    <a href="{{ url_for('apply', job_name=job[1]) }}">
+        <button>Apply Now</button>
+    </a>
+
+</section>
+
+
+<footer>
+    <p>© 2026 CareerNest | Help & Contact</p>
+</footer>
+
+</body>
+</html>

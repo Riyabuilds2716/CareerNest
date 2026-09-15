@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login Successful | CareerNest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* =========================
+           Admin Navbar
+        ========================= */
+
+        nav {
+            background: #0b2d4d;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .admin-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .admin-nav-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           Main Section
+        ========================= */
+
+        .container {
+            min-height: calc(100vh - 130px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .success-card {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+        }
+
+
+        /* =========================
+           Success Icon
+        ========================= */
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: #e8f5ee;
+            color: #16834b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 44px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           Heading
+        ========================= */
+
+        h1 {
+            color: #0b2d4d;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           Admin Information
+        ========================= */
+
+        .admin-box {
+            background: #f1f6fa;
+            border-left: 4px solid #0b2d4d;
+            padding: 20px;
+            text-align: left;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .admin-box h3 {
+            color: #0b2d4d;
+            margin-bottom: 7px;
+        }
+
+        .admin-box p {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           Buttons
+        ========================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .dashboard-btn {
+            background: #0b2d4d;
+            color: white;
+        }
+
+        .dashboard-btn:hover {
+            background: #082238;
+        }
+
+        .home-btn {
+            background: white;
+            color: #0b2d4d;
+            border: 1px solid #0b2d4d;
+        }
+
+        .home-btn:hover {
+            background: #f1f6fa;
+        }
+
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           Mobile Responsive
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 18px 10px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .admin-nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .admin-nav-links a {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            .success-card {
+                padding: 35px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .admin-box {
+                padding: 18px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            footer {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         Admin Navbar
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            CareerNest Admin
+        </div>
+
+        <div class="admin-nav-links">
+            <a href="/admin">
+                Dashboard
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         Success Section
+    ========================= -->
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>
+                Admin Login Successful!
+            </h1>
+
+            <p class="subtitle">
+                Welcome to the CareerNest Administration Panel.
+                You have successfully logged in as an administrator.
+            </p>
+
+
+            <!-- Admin Information -->
+
+            <div class="admin-box">
+
+                <h3>
+                    Admin Access Granted
+                </h3>
+
+                <p>
+                    You can now manage jobs, applications,
+                    job seekers and contact messages from the
+                    administration dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <a href="/admin" class="btn dashboard-btn">
+                    Go to Dashboard
+                </a>
+
+                <a href="/" class="btn home-btn">
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Footer
+    ========================= -->
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

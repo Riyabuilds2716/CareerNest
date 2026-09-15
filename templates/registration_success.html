@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Successful | CareerNest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+        }
+
+        /* Navigation */
+        nav {
+            background: #0b1f3a;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+            margin-right: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a9d3ff;
+        }
+
+        /* Main Section */
+        .success-section {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* Success Card */
+        .success-card {
+            width: 100%;
+            max-width: 620px;
+            background: white;
+            text-align: center;
+            padding: 50px 45px;
+            border-radius: 18px;
+            border: 1px solid #dce6f2;
+            box-shadow: 0 12px 35px rgba(11, 31, 58, 0.12);
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: #e8f2fc;
+            color: #0b4f8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #0b1f3a;
+            font-size: 30px;
+            margin: 0 0 15px;
+        }
+
+        .main-text {
+            color: #475569;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* What's Next */
+        .next-box {
+            background: #f5f9fe;
+            border-left: 4px solid #0b4f8a;
+            padding: 20px;
+            text-align: left;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .next-box h3 {
+            color: #0b1f3a;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .next-box p {
+            color: #64748b;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 26px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login-btn {
+            background: #0b4f8a;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: #083b68;
+            transform: translateY(-2px);
+        }
+
+        .home-btn {
+            background: white;
+            color: #0b4f8a;
+            border: 1px solid #0b4f8a;
+        }
+
+        .home-btn:hover {
+            background: #eef5fc;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0b1f3a;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav h2 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 8px;
+            }
+
+            nav a {
+                margin-left: 8px;
+                margin-right: 8px;
+            }
+
+            .success-card {
+                padding: 40px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .main-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>CareerNest</h2>
+
+        <a href="/">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/about">About</a>
+        <a href="/help">Help & Contact</a>
+        <a href="/login">Login</a>
+    </nav>
+
+
+    <section class="success-section">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>Registration Successful!</h1>
+
+            <p class="main-text">
+                Your Job Seeker account has been created successfully.
+            </p>
+
+            <div class="next-box">
+
+                <h3>What's Next?</h3>
+
+                <p>
+                    Your account is now ready. You can log in using your
+                    registered email and password, explore available jobs,
+                    and apply for opportunities that match your skills.
+                </p>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="/login" class="btn login-btn">
+                    Go to Login
+                </a>
+
+                <a href="/" class="btn home-btn">
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>© 2026 CareerNest| Help & Contact</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerNest - Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ================= HOME PAGE GRID ================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .categories h2 {
+            grid-column: 1 / -1;
+        }
+
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .jobs h2 {
+            grid-column: 1 / -1;
+        }
+
+
+        /* ================= VIEW JOB BUTTON ================= */
+
+        .job-card a button {
+            background: #4f7fa6;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .job-card a button:hover {
+            background: #3d6d91;
+        }
+
+
+        /* ================= 3 DOT MENU ================= */
+
+        .more-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .more-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 8px;
+            line-height: 1;
+        }
+
+        .more-btn:hover {
+            opacity: 0.8;
+        }
+
+        .more-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 38px;
+            width: 210px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .more-dropdown.show {
+            display: block;
+        }
+
+        .more-dropdown a {
+            display: block;
+            color: #222;
+            text-decoration: none;
+            padding: 12px 16px;
+            font-size: 14px;
+            text-align: left;
+            margin: 0;
+        }
+
+        .more-dropdown a:hover {
+            background: #eef4f8;
+            color: #2f5f85;
+        }
+
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 900px) {
+
+            .categories,
+            .jobs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .categories,
+            .jobs {
+                grid-template-columns: 1fr;
+            }
+
+
+            /* Home Search */
+
+            .hero input {
+                display: block;
+                width: 90%;
+                max-width: 320px;
+                height: 48px;
+                margin: 12px auto;
+                box-sizing: border-box;
+            }
+
+            .hero button {
+                display: block;
+                margin: 14px auto 0;
+            }
+
+
+            /* ================= MOBILE NAVBAR ================= */
+
+            nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 5px;
+                padding: 15px 10px;
+            }
+
+            nav h2 {
+                width: 100%;
+                text-align: center;
+                margin: 0 0 8px 0;
+            }
+
+
+            /* Keep Home and Jobs visible */
+
+            nav > a[href="/"],
+            nav > a[href="/jobs"] {
+                display: inline-block;
+            }
+
+
+            /* Hide extra navbar links on mobile */
+
+            nav > a[href="/about"],
+            nav > a[href="/help"],
+            nav > a[href="/register"],
+            nav > a[href="/login"],
+            nav > a[href="/admin-login"] {
+                display: none;
+            }
+
+
+            /* ================= 3 DOT MENU ================= */
+
+            .more-menu {
+                display: inline-block;
+                position: relative;
+            }
+
+            .more-btn {
+                font-size: 28px;
+                padding: 0 8px;
+            }
+
+            .more-dropdown {
+                right: -5px;
+                top: 38px;
+                width: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="{% if appearance == 'Dark' %}dark-mode{% endif %}">
+
+
+<!-- ================= NAVIGATION BAR ================= -->
+
+
+    <nav>
+          <h2>CareerNest</h2>  
+          
+    <a href="/">Home</a>
+
+    <a href="/jobs">Jobs</a>
+
+    <a href="/about">About</a>
+
+    <a href="/help">Help & Contact</a>
+
+    <a href="/register">Job Seeker</a>
+
+    <a href="/login">Login</a>
+
+    <a href="/admin-login">Admin</a>
+
+
+    <!-- ================= 3 DOT MENU ================= -->
+
+    <div class="more-menu">
+
+        <button
+            type="button"
+            class="more-btn"
+            onclick="toggleMoreMenu()"
+            aria-label="More options"
+        >
+            ⋮
+        </button>
+
+
+        <div class="more-dropdown" id="moreDropdown">
+
+            <a href="/profile">
+                👤 My Profile
+            </a>
+
+            <a href="/edit-profile">
+                ✏️ Edit Profile
+            </a>
+
+            <a href="/my-applications">
+                📄 My Applications
+            </a>
+
+            <a href="/jobs">
+                🔍 Browse Jobs
+            </a>
+
+            <a href="/notification-settings">
+                🔔 Notifications
+            </a>
+
+            <a href="/settings">
+                ⚙️ Settings
+            </a>
+
+            <a href="/help">
+                📞 Help & Contact
+            </a>
+
+            <a href="/about">
+                ℹ️ About Us
+            </a>
+
+            <a href="/logout">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO / SEARCH SECTION ================= -->
+
+<section class="hero">
+
+    <h1>
+        Find Your Dream Job
+    </h1>
+
+    <p>
+        Search for jobs and take the next step in your career.
+    </p>
+
+
+    <input
+        type="text"
+        id="jobSearch"
+        placeholder="Search job title or keyword"
+    >
+
+
+    <input
+        type="text"
+        id="locationSearch"
+        placeholder="Location"
+    >
+
+
+    <button onclick="searchJobs()">
+        Search
+    </button>
+
+</section>
+
+
+<!-- ================= POPULAR JOB CATEGORIES ================= -->
+
+<section class="categories">
+
+    <h2>
+        Popular Job Categories
+    </h2>
+
+
+    <div class="category">
+        <h3>IT & Software</h3>
+        <p>Find technology and software jobs.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Finance</h3>
+        <p>Explore finance and accounting jobs.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Marketing</h3>
+        <p>Discover marketing opportunities.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Education</h3>
+        <p>Find teaching and education jobs.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Freelance</h3>
+        <p>Explore flexible freelance jobs.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Content Creator</h3>
+        <p>Find content creation opportunities.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Digital Marketing</h3>
+        <p>Find digital marketing jobs.</p>
+    </div>
+
+
+    <div class="category">
+        <h3>Graphic Design</h3>
+        <p>Explore creative design jobs.</p>
+    </div>
+
+</section>
+
+
+<!-- ================= POPULAR JOBS ================= -->
+
+<section class="jobs">
+
+    <h2>
+        Popular Jobs
+    </h2>
+
+
+    <div class="job-card">
+
+        <h3>Python Developer</h3>
+
+        <p>Company: Tech Solutions</p>
+        <p>Location: Mumbai</p>
+        <p>Skills: Python, Flask</p>
+
+        <a href="{{ url_for('job_details', job_name='Python Developer') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+    <div class="job-card">
+
+        <h3>Web Developer</h3>
+
+        <p>Company: Web Works</p>
+        <p>Location: Mumbai</p>
+        <p>Skills: HTML, CSS, JavaScript</p>
+
+        <a href="{{ url_for('job_details', job_name='Web Developer') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Data Entry Operator</h3>
+
+        <p>Company: Data Services</p>
+        <p>Location: Pune</p>
+        <p>Skills: Excel, Typing</p>
+
+        <a href="{{ url_for('job_details', job_name='Data Entry Operator') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Software Tester</h3>
+
+        <p>Company: Quality Tech</p>
+
+        <p>Location: Mumbai</p>
+
+        <p>Skills: Testing, SQL</p>
+
+        <a href="{{ url_for('job_details', job_name='Software Tester') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Graphic Designer</h3>
+
+        <p>Company: Creative Studio</p>
+
+        <p>Location: Pune</p>
+
+        <p>Skills: Photoshop, Canva</p>
+
+        <a href="{{ url_for('job_details', job_name='Graphic Designer') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Digital Marketing Intern</h3>
+
+        <p>Company: Digital World</p>
+
+        <p>Location: Mumbai</p>
+
+        <p>Skills: SEO, Social Media</p>
+
+        <a href="{{ url_for('job_details', job_name='Digital Marketing Intern') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Frontend Developer</h3>
+
+        <p>Company: Tech World</p>
+
+        <p>Location: Mumbai</p>
+
+        <p>Skills: HTML, CSS, JavaScript</p>
+
+        <a href="{{ url_for('job_details', job_name='Frontend Developer') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+
+    <div class="job-card">
+
+        <h3>Database Assistant</h3>
+
+        <p>Company: Database Solutions</p>
+
+        <p>Location: Pune</p>
+
+        <p>Skills: SQL, MySQL</p>
+
+        <a href="{{ url_for('job_details', job_name='Database Assistant') }}">
+            <button type="button">View Job</button>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 CareerNest |
+        <a href="/">Home</a> |
+        <a href="/jobs">Jobs</a> |
+        <a href="/about">About</a> |
+        <a href="/help">Help & Contact</a>
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+<!-- ================= 3 DOT MENU JAVASCRIPT ================= -->
+
+<script>
+
+    function toggleMoreMenu() {
+
+        const menu = document.getElementById("moreDropdown");
+
+        menu.classList.toggle("show");
+
+    }
+
+
+    /* Close menu when clicking outside */
+
+    document.addEventListener("click", function(event) {
+
+        const menu = document.querySelector(".more-menu");
+        const dropdown = document.getElementById("moreDropdown");
+
+        if (!menu.contains(event.target)) {
+
+            dropdown.classList.remove("show");
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>

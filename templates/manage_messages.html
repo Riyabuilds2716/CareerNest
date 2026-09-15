@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Messages - CareerNest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+        }
+
+        nav {
+            background: #0b1f3a;
+            padding: 17px 6%;
+            display: flex;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin-right: auto;
+            font-size: 23px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a9d3ff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #0b1f3a;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        .table-container {
+            background: white;
+            border: 1px solid #dce6f2;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 7px 22px rgba(11, 31, 58, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #0b1f3a;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8fbff;
+        }
+
+        .message {
+            max-width: 350px;
+            line-height: 1.5;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .empty h3 {
+            color: #0b1f3a;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #64748b;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0b4f8a;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #083b68;
+        }
+
+        footer {
+            background: #0b1f3a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+
+            .container {
+                width: 94%;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav h2 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .heading h1 {
+                font-size: 25px;
+            }
+
+            .buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <h2>CareerNest</h2>
+
+        <a href="/admin">Dashboard</a>
+        <a href="/">Home</a>
+        <a href="/admin-logout">Logout</a>
+
+    </nav>
+
+    <main class="container">
+
+        <div class="heading">
+
+            <h1>Contact Messages</h1>
+
+            <p>
+                View messages and inquiries submitted through
+                the Help & Contact page.
+            </p>
+
+        </div>
+
+        <div class="table-container">
+
+            {% if messages %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for message in messages %}
+
+                    <tr>
+
+                        <td>{{ message[0] }}</td>
+
+                        <td>{{ message[1] }}</td>
+
+                        <td>{{ message[2] }}</td>
+
+                        <td>{{ message[3] }}</td>
+
+                        <td class="message">
+                            {{ message[4] }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>No Messages Found</h3>
+
+                <p>
+                    No contact messages have been submitted yet.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="/admin" class="btn">
+                Back to Dashboard
+            </a>
+
+            <a href="/help" class="btn">
+                Help & Contact
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 CareerNest | Admin Panel
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

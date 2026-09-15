@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>All Jobs - CareerNest</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* =========================
+           JOB SEARCH RESULTS
+           ========================= */
+
+        .jobs {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+
+            align-items: stretch;
+        }
+
+
+        /* =========================
+           PAGE HEADING
+           ========================= */
+
+        .jobs > h1 {
+            grid-column: 1 / -1;
+
+            color: #0b2d4d;
+            margin-bottom: 0;
+        }
+
+
+        .jobs > p {
+            grid-column: 1 / -1;
+
+            color: #667085;
+
+            margin-top: -8px;
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================
+           SEARCH FORM
+           ========================= */
+
+        .search-form {
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            gap: 12px;
+
+            background: white;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 10px;
+        }
+
+
+        .search-form input {
+
+            flex: 1;
+
+            padding: 12px 14px;
+
+            border: 1px solid #d0d7de;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+
+        .search-form input:focus {
+
+            border-color: #6f9fc4;
+        }
+
+
+        .search-form button {
+
+            background: #0b4f8a;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 20px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .search-form button:hover {
+
+            background: #083b68;
+        }
+
+
+        .search-form a {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 0 18px;
+
+            background: #eef3f7;
+
+            color: #0b2d4d;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .search-form a:hover {
+
+            background: #dfe8ef;
+        }
+
+
+        /* =========================
+           JOB CARD
+           ========================= */
+
+        .job-card {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+            min-height: 300px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .job-card h3 {
+
+            color: #0b2d4d;
+
+            font-size: 19px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .job-card p {
+
+            color: #555;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 9px;
+        }
+
+
+        /* =========================
+           VIEW JOB BUTTON
+           ========================= */
+
+        .job-card a {
+
+            margin-top: auto;
+
+            text-decoration: none;
+        }
+
+
+        .job-card button {
+
+            width: 100%;
+
+            background: #6f9fc4;
+
+            color: white;
+
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .job-card button:hover {
+
+            background: #5789ad;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+           ========================= */
+
+        @media (max-width: 1000px) {
+
+            .jobs {
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .jobs {
+
+                width: 94%;
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .job-card {
+
+                min-height: auto;
+            }
+
+
+            .search-form {
+
+                flex-direction: column;
+            }
+
+
+            .search-form button,
+            .search-form a {
+
+                width: 100%;
+
+                min-height: 42px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION BAR
+     ========================= -->
+
+<nav>
+
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+
+    <a href="/jobs">Jobs</a>
+
+    <a href="/about">About</a>
+
+    <a href="/help">Help & Contact</a>
+
+    <a href="/register">Job Seeker</a>
+
+    <a href="/login">Login</a>
+
+</nav>
+
+
+
+<!-- =========================
+     JOB SEARCH RESULTS
+     ========================= -->
+
+<section class="jobs">
+
+
+    <h1>Job Search Results</h1>
+
+
+    <!-- =========================
+         SEARCH FORM
+         ========================= -->
+
+    <form action="/jobs" method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="keyword"
+            placeholder="Search job, company or skill"
+            value="{{ keyword }}"
+        >
+
+        <input
+            type="text"
+            name="location"
+            placeholder="Enter location"
+            value="{{ location }}"
+        >
+
+        <button type="submit">
+            Search Jobs
+        </button>
+
+        <a href="/jobs">
+            Clear
+        </a>
+
+    </form>
+
+
+
+    {% if keyword or location %}
+
+        <p>
+
+            Showing results for:
+
+            {% if keyword %}
+
+                <strong>{{ keyword }}</strong>
+
+            {% endif %}
+
+
+            {% if location %}
+
+                in <strong>{{ location }}</strong>
+
+            {% endif %}
+
+        </p>
+
+    {% endif %}
+
+
+
+    <!-- =========================
+         JOBS AVAILABLE
+         ========================= -->
+
+    {% if jobs|length > 0 %}
+
+
+        {% for job in jobs %}
+
+
+        <div class="job-card">
+
+
+            <h3>
+                {{ job[1] }}
+            </h3>
+
+
+            <p>
+                <strong>Company:</strong>
+                {{ job[2] }}
+            </p>
+
+
+            <p>
+                <strong>Location:</strong>
+                {{ job[3] }}
+            </p>
+
+
+            <p>
+                <strong>Skills:</strong>
+                {{ job[4] }}
+            </p>
+
+
+            <!-- VIEW JOB -->
+
+            <a href="{{ url_for('job_details', job_name=job[1]) }}">
+
+                <button type="button">
+                    View Job
+                </button>
+
+            </a>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+
+    {% else %}
+
+
+        <!-- =========================
+             NO JOBS FOUND
+             ========================= -->
+
+        <div class="job-card">
+
+
+            <h3>
+                No Jobs Found
+            </h3>
+
+
+            <p>
+
+                No jobs match your search.
+                Please try another keyword or location.
+
+            </p>
+
+
+            <a href="/jobs">
+
+                <button type="button">
+                    View All Jobs
+                </button>
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+
+<footer>
+
+    <p>
+        © 2026 CareerNest| Help & Contact
+    </p>
+
+</footer>
+
+
+</body>
+</html>

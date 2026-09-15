@@ -1,0 +1,668 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* Navigation */
+nav {
+    background-color: #1f4e79;
+    padding: 18px;
+}
+
+nav h2 {
+    display: inline;
+    color: white;
+    margin-right: 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Home Page Hero */
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+    background-color: #eaf2f8;
+}
+
+.hero h1 {
+    font-size: 40px;
+    color: #1f4e79;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #333;
+}
+
+.hero input {
+    padding: 12px;
+    width: 220px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    background-color: #1f4e79;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #163a5c;
+}
+
+/* Categories */
+.categories {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.category {
+    display: inline-block;
+    background-color: white;
+    width: 200px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.category h3 {
+    color: #1f4e79;
+}
+
+.category p {
+    color: #333;
+}
+
+/* All Jobs */
+.jobs {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.job-card {
+    display: inline-block;
+    vertical-align: top;
+    background-color: white;
+    width: 250px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+    text-align: left;
+}
+
+.job-card h3 {
+    color: #1f4e79;
+}
+
+.job-card p {
+    color: #333;
+}
+
+.job-card button {
+    margin-top: 10px;
+    background-color: #1f4e79;
+    color: white;
+}
+
+.job-card button:hover {
+    background-color: #163a5c;
+}
+
+/* View Job Link */
+.job-card a {
+    color: #1f4e79;
+    text-decoration: none;
+}
+
+.job-card a button {
+    background-color: #1f4e79 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.job-card a button:hover {
+    background-color: #163a5c !important;
+}
+
+/* Job Details */
+.job-details {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.job-details h1 {
+    color: #1f4e79;
+}
+
+.job-details h2 {
+    color: #1f4e79;
+}
+
+.job-details p {
+    color: #333;
+}
+
+/* Registration / Forms */
+.form-section {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.form-section h1 {
+    text-align: center;
+    color: #1f4e79;
+}
+
+.form-section p {
+    text-align: center;
+    color: #333;
+}
+
+.form-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #1f4e79;
+    font-weight: bold;
+}
+
+.form-section input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-section button {
+    margin-top: 20px;
+}
+
+/* Admin Dashboard Text */
+.management-card h1,
+.management-card h2,
+.management-card h3,
+.management-card p {
+    color: #333;
+}
+
+.management-card h1,
+.management-card h2,
+.management-card h3 {
+    color: #1f4e79;
+}
+
+.admin-card h1,
+.admin-card h2,
+.admin-card h3,
+.admin-card p {
+    color: #333;
+}
+
+.admin-card h1,
+.admin-card h2,
+.admin-card h3 {
+    color: #1f4e79;
+}
+
+/* Admin Dashboard Buttons */
+.management-card button,
+.management-card a,
+.admin-card button,
+.admin-card a {
+    color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background-color: #1f4e79;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+/* Footer Links */
+footer a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==================================================
+   MOBILE RESPONSIVE
+   Desktop/Laptop CSS above remains unchanged
+   ================================================== */
+
+@media (max-width: 600px) {
+
+    /* Page width */
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* =========================
+       Navigation
+       ========================= */
+
+    nav {
+        padding: 15px 10px;
+        text-align: center;
+    }
+
+    nav h2 {
+        display: block;
+        margin: 0 0 12px 0;
+        font-size: 26px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px 7px;
+        font-size: 15px;
+    }
+
+
+    /* =========================
+       Home Hero
+       ========================= */
+
+    .hero {
+        padding: 45px 15px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+        line-height: 1.2;
+        margin: 10px 0;
+    }
+
+    .hero p {
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+    .hero input {
+        width: 100%;
+        max-width: 280px;
+        box-sizing: border-box;
+        margin: 8px auto;
+    }
+
+
+    /* =========================
+       Categories
+       ========================= */
+
+    .categories {
+        padding: 30px 10px;
+    }
+
+    .category {
+        width: 90%;
+        max-width: 300px;
+        box-sizing: border-box;
+        margin: 10px auto;
+    }
+
+
+    /* =========================
+       Jobs
+       ========================= */
+
+    .jobs {
+        padding: 30px 10px;
+    }
+
+    .job-card {
+        width: 90%;
+        max-width: 320px;
+        box-sizing: border-box;
+        margin: 10px auto;
+    }
+
+
+    /* =========================
+       Job Details
+       ========================= */
+
+    .job-details {
+        width: 90%;
+        max-width: 700px;
+        box-sizing: border-box;
+        padding: 20px;
+        margin: 25px auto;
+    }
+
+
+    /* =========================
+       Forms
+       ========================= */
+
+    .form-section {
+        width: 90%;
+        max-width: 500px;
+        box-sizing: border-box;
+        padding: 20px;
+        margin: 25px auto;
+    }
+
+    .form-section input,
+    .form-section textarea,
+    .form-section select {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-section button {
+        width: 100%;
+    }
+
+
+    /* =========================
+       Tables
+       Prevent data from being cut
+       ========================= */
+
+    table {
+        width: 100%;
+        min-width: 650px;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+
+    /* =========================
+       Long Text
+       ========================= */
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4 {
+        overflow-wrap: break-word;
+    }
+
+
+    /* =========================
+       Footer
+       ========================= */
+
+    footer {
+        padding: 15px 10px;
+    }
+}
+ /* =========================
+   PART 2 — DARK MODE
+   ========================= */
+
+body.dark-mode {
+    background: #0f172a;
+    color: #f1f5f9;
+}
+
+/* Navbar */
+
+body.dark-mode nav {
+    background: #0b1f33;
+}
+
+body.dark-mode nav a {
+    color: #ffffff;
+}
+
+body.dark-mode nav a:hover {
+    color: #9cc7e8;
+}
+
+/* Hero */
+
+body.dark-mode .hero {
+    background: #111827;
+    color: #f1f5f9;
+}
+
+body.dark-mode .hero h1,
+body.dark-mode .hero p {
+    color: #f1f5f9;
+}
+
+body.dark-mode .hero input,
+body.dark-mode .hero textarea,
+body.dark-mode .hero select {
+    background: #1e293b;
+    color: #ffffff;
+    border-color: #475569;
+}
+
+body.dark-mode .hero input::placeholder {
+    color: #94a3b8;
+}
+
+/* Sections */
+
+body.dark-mode section {
+    color: #f1f5f9;
+}
+
+body.dark-mode section h2 {
+    color: #ffffff;
+}
+
+/* Category Cards */
+
+body.dark-mode .category {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .category h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .category p {
+    color: #cbd5e1;
+}
+
+/* Job Cards */
+
+body.dark-mode .job-card {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .job-card h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .job-card p {
+    color: #cbd5e1;
+}
+
+/* Buttons */
+
+body.dark-mode button,
+body.dark-mode .btn,
+body.dark-mode .view-btn {
+    color: #ffffff;
+}
+
+/* Forms */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #1e293b;
+    color: #ffffff;
+    border-color: #475569;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Form Section */
+
+body.dark-mode .form-section {
+    background: #111827;
+    color: #f1f5f9;
+}
+
+/* Job Details */
+
+body.dark-mode .job-details {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+}
+
+body.dark-mode .job-details h1,
+body.dark-mode .job-details h2,
+body.dark-mode .job-details h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .job-details p {
+    color: #cbd5e1;
+}
+
+/* Settings Cards */
+
+body.dark-mode .setting-card {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+}
+
+body.dark-mode .setting-card h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .setting-card p {
+    color: #cbd5e1;
+}
+
+/* Footer */
+
+body.dark-mode footer {
+    background: #0b1f33;
+    color: #cbd5e1;
+}
+
+body.dark-mode footer a {
+    color: #9cc7e8;
+}
+
+/* 3-Dot Menu */
+
+body.dark-mode .more-dropdown {
+    background: #1e293b;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .more-dropdown a {
+    color: #f1f5f9;
+}
+
+body.dark-mode .more-dropdown a:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .categories,
+    .jobs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .categories,
+    .jobs {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .job-card,
+    .category,
+    .setting-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+}
+.career-logo {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+}
+
+

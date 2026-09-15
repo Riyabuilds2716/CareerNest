@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Updated Successfully | CareerNest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #0b2d4d;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 60px auto;
+            flex: 1;
+        }
+
+        .success-card {
+            background: white;
+            padding: 45px 35px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 22px;
+            background: #e8f6ee;
+            color: #198754;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #0b2d4d;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #667085;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .info-box {
+            background: #f1f6fa;
+            border-left: 4px solid #0b2d4d;
+            padding: 18px;
+            text-align: left;
+            border-radius: 7px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: #0b2d4d;
+            margin-bottom: 7px;
+        }
+
+        .info-box p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .dashboard-btn {
+            background: #0b2d4d;
+            color: white;
+        }
+
+        .dashboard-btn:hover {
+            background: #082238;
+        }
+
+        .jobs-btn {
+            background: #e8eef4;
+            color: #0b2d4d;
+        }
+
+        .jobs-btn:hover {
+            background: #dce5ed;
+        }
+
+        footer {
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 35px auto;
+            }
+
+            .success-card {
+                padding: 35px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">CareerNest Admin</div>
+
+        <div class="nav-links">
+            <a href="/admin">Dashboard</a>
+            <a href="/manage-jobs">Manage Jobs</a>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>Job Updated Successfully!</h1>
+
+            <p class="subtitle">
+                The job details have been successfully updated
+                in the CareerNest database.
+            </p>
+
+            <div class="info-box">
+
+                <h3>Update Completed</h3>
+
+                <p>
+                    The changes you made to the job listing have been
+                    saved successfully. You can now view the updated
+                    job or continue managing other job listings.
+                </p>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="/manage-jobs" class="btn dashboard-btn">
+                    Back to Manage Jobs
+                </a>
+
+                <a href="/admin" class="btn jobs-btn">
+                    Admin Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

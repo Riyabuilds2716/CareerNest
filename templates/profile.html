@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - CareerNest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #1f4e79;
+            color: white;
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .navbar a:hover {
+            color: #dbeafe;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            color: #1f4e79;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #666;
+        }
+
+        .info {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .info:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #1f4e79;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #163a5c;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 60px;
+            background: #1f4e79;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .navbar a {
+                margin: 0 8px;
+            }
+
+            .container {
+                width: 95%;
+                margin: 25px auto;
+            }
+
+            .profile-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <h2>CareerNest</h2>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/about">About</a>
+            <a href="/help">Help & Contact</a>
+            <a href="/my-applications">My Applications</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <div class="container">
+
+        <div class="profile-card">
+
+            <div class="heading">
+                <h1>My Profile</h1>
+                <p>View your CareerNest Job Seeker account details.</p>
+            </div>
+
+            {% if profile %}
+
+            <div class="info">
+                <span class="label">Full Name</span>
+                {{ profile["full_name"] }}
+            </div>
+
+            <div class="info">
+                <span class="label">Email Address</span>
+                {{ profile["email"] }}
+            </div>
+
+            <div class="info">
+                <span class="label">Phone Number</span>
+                {{ profile["phone"] }}
+            </div>
+
+            <div class="info">
+                <span class="label">Qualification</span>
+                {{ profile["qualification"] or "Not provided" }}
+            </div>
+
+            <div class="info">
+                <span class="label">Skills</span>
+                {{ profile["skills"] or "Not provided" }}
+            </div>
+
+            {% else %}
+
+            <div class="heading">
+                <h3>Profile Not Found</h3>
+                <p>Your profile information could not be found.</p>
+            </div>
+
+            {% endif %}
+
+
+            <div class="buttons">
+
+                <a href="/edit-profile" class="btn">
+                    ✏️ Edit Profile
+                </a>
+
+                <a href="/jobs" class="btn">
+                    Browse Jobs
+                </a>
+
+                <a href="/my-applications" class="btn">
+                    My Applications
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

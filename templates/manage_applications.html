@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Applications | CareerNest Admin</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #0b2d4d;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            flex: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #0b2d4d;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: #667085;
+        }
+
+        .back-btn {
+            background: #0b2d4d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #16476f;
+        }
+
+        .count {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            color: #0b2d4d;
+            font-weight: bold;
+        }
+
+        .application-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .application-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .application-card h2 {
+            color: #0b2d4d;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .job-name {
+            color: #667085;
+            margin-bottom: 18px;
+        }
+
+        .job-name strong {
+            color: #0b2d4d;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .detail-box {
+            background: #f7f9fc;
+            padding: 12px;
+            border-radius: 7px;
+        }
+
+        .detail-box strong {
+            display: block;
+            color: #0b2d4d;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .detail-box span {
+            color: #555;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .cover-message {
+            background: #f1f6fa;
+            border-left: 4px solid #0b2d4d;
+            padding: 15px;
+            border-radius: 7px;
+            margin-bottom: 18px;
+        }
+
+        .cover-message strong {
+            display: block;
+            color: #0b2d4d;
+            margin-bottom: 7px;
+        }
+
+        .cover-message p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .status-section {
+            background: #f7f9fc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e1e7ee;
+        }
+
+        .status-section > strong {
+            display: block;
+            color: #0b2d4d;
+            margin-bottom: 10px;
+        }
+
+        .status-form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .status-form select {
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .status-form button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #6f9fc4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .status-form button:hover {
+            background: #5789ad;
+        }
+
+        .empty {
+            background: white;
+            padding: 50px 25px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .empty h2 {
+            color: #0b2d4d;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #667085;
+        }
+
+        footer {
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .back-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .status-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-form select,
+            .status-form button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            CareerNest Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/manage-jobs">
+                Manage Jobs
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    Manage Applications
+                </h1>
+
+                <p>
+                    Review and manage applications submitted
+                    by job seekers.
+                </p>
+
+            </div>
+
+            <a href="/admin" class="back-btn">
+                Admin Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- APPLICATION COUNT -->
+
+        <div class="count">
+
+            Total Applications:
+            {{ applications|length }}
+
+        </div>
+
+
+        {% if applications %}
+
+        <div class="application-list">
+
+            {% for application in applications %}
+
+            <div class="application-card">
+
+                <!-- APPLICANT NAME -->
+
+                <h2>
+                    {{ application[2] }}
+                </h2>
+
+                <!-- JOB NAME -->
+
+                <div class="job-name">
+
+                    Applied for:
+
+                    <strong>
+                        {{ application[1] }}
+                    </strong>
+
+                </div>
+
+
+                <!-- DETAILS -->
+
+                <div class="details">
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Application ID
+                        </strong>
+
+                        <span>
+                            {{ application[0] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Email
+                        </strong>
+
+                        <span>
+                            {{ application[3] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Phone
+                        </strong>
+
+                        <span>
+                            {{ application[4] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Applied On
+                        </strong>
+
+                        <span>
+                            {{ application[7] }}
+                        </span>
+
+                    </div>
+
+                </div>
+                <!-- COVER MESSAGE -->
+
+                <div class="cover-message">
+
+                    <strong>
+                        Cover Message
+                    </strong>
+
+                    <p>
+                        {{ application[5] or "No cover message provided." }}
+                    </p>
+
+                </div>
+
+
+                <!-- APPLICATION STATUS -->
+
+                <div class="status-section">
+
+                    <strong>
+                        Application Status
+                    </strong>
+
+                    <form
+                        action="/update-application-status/{{ application[0] }}"
+                        method="POST"
+                        class="status-form"
+                    >
+
+                        <select name="status">
+
+                            <option
+                                value="Pending"
+                                {% if application[6] == "Pending" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Pending
+                            </option>
+
+                            <option
+                                value="Shortlisted"
+                                {% if application[6] == "Shortlisted" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Shortlisted
+                            </option>
+
+                            <option
+                                value="Rejected"
+                                {% if application[6] == "Rejected" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Rejected
+                            </option>
+
+                        </select>
+
+                        <button type="submit">
+                            Update Status
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <!-- NO APPLICATIONS -->
+
+        <div class="empty">
+
+            <h2>
+                No Applications Found
+            </h2>
+
+            <p>
+                No job applications have been submitted yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 CareerNest. All Rights Reserved.
+
+    </footer>
+
+</body>
+
+</html>

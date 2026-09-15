@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Job | CareerNest Admin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        nav {
+            background: #0b2d4d;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #b9d9f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 40px auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #0b2d4d;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #667085;
+        }
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #0b2d4d;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d0d5dd;
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #0b2d4d;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background: #0b2d4d;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #082238;
+        }
+
+        .back-btn {
+            background: #e8eef4;
+            color: #0b2d4d;
+        }
+
+        .back-btn:hover {
+            background: #dce5ed;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            CareerNest Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/manage-jobs">
+                Manage Jobs
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>
+                Edit Job
+            </h1>
+
+            <p>
+                Update the details of this job listing.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <form method="POST">
+
+
+                <!-- Job Title -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Job Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ job[1] }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Company -->
+
+                <div class="form-group">
+
+                    <label for="company">
+                        Company
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value="{{ job[2] }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        value="{{ job[3] }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Required Skills -->
+
+                <div class="form-group">
+
+                    <label for="skills">
+                        Required Skills
+                    </label>
+
+                    <input
+                        type="text"
+                        id="skills"
+                        name="skills"
+                        value="{{ job[4] }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Job Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        required
+                    >{{ job[5] }}</textarea>
+
+                </div>
+               <!-- Buttons -->
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="btn save-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                    <a
+                        href="/manage-jobs"
+                        class="btn back-btn"
+                    >
+                        Back to Manage Jobs
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
+ 

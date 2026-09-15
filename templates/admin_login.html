@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login - CareerNest</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/about">About</a>
+    <a href="/help">Help & Contact</a>
+    <a href="/login">Login</a>
+</nav>
+
+<section class="form-section">
+
+    <h1>Admin Login</h1>
+
+    <form method="POST" action="/admin-login">
+
+        <label>Admin Username</label>
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter admin username"
+            required
+        >
+
+        <label>Admin Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter admin password"
+            required
+        >
+
+        <button type="submit">Admin Login</button>
+
+    </form>
+
+</section>
+
+<footer>
+    <p>© 2026 CareerNest | Admin Panel</p>
+</footer>
+
+</body>
+</html>

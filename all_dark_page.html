@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CareerNest Theme</title>
+
+    <style>
+
+        /* =====================================================
+           CARRERNEST  - COMMON DARK / LIGHT THEME
+           Theme styling only.
+           Existing page functions are not changed.
+           ===================================================== */
+
+
+        /* =========================
+           LIGHT MODE
+           ========================= */
+
+        body.light-mode {
+            background-color: #ffffff;
+            color: #222222;
+        }
+
+
+        /* =========================
+           DARK MODE - GLOBAL
+           ========================= */
+
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #f5f5f5 !important;
+        }
+
+
+        /* =========================
+           NAVIGATION
+           ========================= */
+
+        body.dark-mode nav {
+            background-color: #0b1f33 !important;
+            color: white !important;
+        }
+
+        body.dark-mode nav h1,
+        body.dark-mode nav h2,
+        body.dark-mode nav h3 {
+            color: white !important;
+        }
+
+        body.dark-mode nav a {
+            color: white !important;
+        }
+
+        body.dark-mode nav a:hover {
+            color: #a9d3ff !important;
+        }
+
+
+        /* =========================
+           COMMON HEADINGS
+           ========================= */
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode h5,
+        body.dark-mode h6 {
+            color: #ffffff !important;
+        }
+
+
+        /* =========================
+           COMMON PARAGRAPHS
+           ========================= */
+
+        body.dark-mode p,
+        body.dark-mode label,
+        body.dark-mode span {
+            color: #dddddd;
+        }
+
+
+        /* =========================
+           MAIN SECTIONS
+           ========================= */
+
+        body.dark-mode section,
+        body.dark-mode main {
+            color: #f5f5f5;
+        }
+
+
+        /* =========================
+           COMMON CARDS
+           ========================= */
+
+        body.dark-mode .card,
+        body.dark-mode .category,
+        body.dark-mode .job-card,
+        body.dark-mode .job-details,
+        body.dark-mode .form-section,
+        body.dark-mode .setting-card,
+        body.dark-mode .profile-card,
+        body.dark-mode .application-card,
+        body.dark-mode .management-card,
+        body.dark-mode .stat-card,
+        body.dark-mode .quick-section,
+        body.dark-mode .jobs-overview,
+        body.dark-mode .dashboard-header,
+        body.dark-mode .success-card,
+        body.dark-mode .container-card,
+        body.dark-mode .content-card {
+            background-color: #1e1e1e !important;
+            color: #f5f5f5 !important;
+            border-color: #333333 !important;
+        }
+
+
+        /* =========================
+           ADMIN DASHBOARD
+           ========================= */
+
+        body.dark-mode .dashboard-header h1 {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .dashboard-header p {
+            color: #cccccc !important;
+        }
+
+        body.dark-mode .section-title {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .stat-card h3 {
+            color: #cccccc !important;
+        }
+
+        body.dark-mode .stat-card .number {
+            color: #7db7e8 !important;
+        }
+
+        body.dark-mode .management-card h3 {
+            color: #7db7e8 !important;
+        }
+
+        body.dark-mode .management-card p {
+            color: #cccccc !important;
+        }
+
+        body.dark-mode .quick-section h2,
+        body.dark-mode .jobs-overview h2 {
+            color: #7db7e8 !important;
+        }
+
+        body.dark-mode .quick-section p,
+        body.dark-mode .jobs-overview p {
+            color: #cccccc !important;
+        }
+
+
+        /* =========================
+           ADMIN BUTTONS
+           ========================= */
+
+        body.dark-mode .manage-btn {
+            background-color: #0b4f8a !important;
+            color: white !important;
+        }
+
+        body.dark-mode .manage-btn:hover {
+            background-color: #083b68 !important;
+        }
+
+        body.dark-mode .quick-btn {
+            background-color: #26384a !important;
+            color: #9ac8ee !important;
+            border-color: #40566d !important;
+        }
+
+        body.dark-mode .quick-btn:hover {
+            background-color: #31485e !important;
+        }
+
+
+        /* =========================
+           JOB COUNT
+           ========================= */
+
+        body.dark-mode .job-count {
+            background-color: #252525 !important;
+            color: #dddddd !important;
+            border-left-color: #4f8fc4 !important;
+        }
+
+        body.dark-mode .job-count strong {
+            color: #7db7e8 !important;
+        }
+
+
+        /* =========================
+           INPUTS
+           ========================= */
+
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+            border-color: #555555 !important;
+        }
+
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: #aaaaaa !important;
+        }
+
+
+        /* =========================
+           TABLES
+           ========================= */
+
+        body.dark-mode table {
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+            border-color: #444444 !important;
+        }
+
+        body.dark-mode thead,
+        body.dark-mode th {
+            background-color: #0b1f33 !important;
+            color: white !important;
+        }
+
+        body.dark-mode td {
+            background-color: #1e1e1e !important;
+            color: #eeeeee !important;
+            border-color: #444444 !important;
+        }
+
+
+        /* =========================
+           FORMS
+           ========================= */
+
+        body.dark-mode form {
+            color: #f5f5f5;
+        }
+
+        body.dark-mode form label {
+            color: #dddddd !important;
+        }
+
+
+        /* =========================
+           LINKS
+           ========================= */
+
+        body.dark-mode a {
+            color: #7db7e8;
+        }
+
+
+        /* =========================
+           BUTTONS
+           ========================= */
+
+        body.dark-mode button {
+            color: white;
+        }
+
+
+        /* =========================
+           DROPDOWN
+           ========================= */
+
+        body.dark-mode .more-dropdown {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .more-dropdown a {
+            color: white !important;
+        }
+
+        body.dark-mode .more-dropdown a:hover {
+            background-color: #2a2a2a !important;
+        }
+
+
+        /* =========================
+           HERO
+           ========================= */
+
+        body.dark-mode .hero {
+            background-color: #1b2836 !important;
+            color: white !important;
+        }
+
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        body.dark-mode footer {
+            background-color: #0b1f33 !important;
+            color: white !important;
+        }
+
+        body.dark-mode footer p,
+        body.dark-mode footer a {
+            color: white !important;
+        }
+
+
+        /* =========================
+           SUCCESS / MESSAGE PAGES
+           ========================= */
+
+        body.dark-mode .success,
+        body.dark-mode .success-message,
+        body.dark-mode .message,
+        body.dark-mode .success-container {
+            background-color: #1e1e1e !important;
+            color: #f5f5f5 !important;
+        }
+
+
+        /* =========================
+           BORDERS / HR
+           ========================= */
+
+        body.dark-mode hr {
+            border-color: #444444 !important;
+        }
+
+
+        /* =========================
+           SHADOWS
+           ========================= */
+
+        body.dark-mode .stat-card,
+        body.dark-mode .management-card,
+        body.dark-mode .quick-section,
+        body.dark-mode .jobs-overview,
+        body.dark-mode .card {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

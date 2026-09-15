@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Seeker Login - CareerNest</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+        }
+
+        /* Navigation */
+        nav {
+            background: #1f4e79;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav h2 {
+            margin: 0;
+            margin-right: auto;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a9d3ff;
+        }
+
+        /* Login Section */
+        .login-container {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* Login Card */
+        .login-card {
+            width: 100%;
+            max-width: 460px;
+            background: white;
+            padding: 45px 40px;
+            border-radius: 18px;
+            border: 1px solid #dce6f2;
+            box-shadow: 0 12px 35px rgba(11, 31, 58, 0.12);
+        }
+
+        .login-card h1 {
+            text-align: center;
+            color: #0b4f8a;
+            font-size: 30px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 22px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        /* Labels */
+        .login-card label {
+            display: block;
+            margin: 17px 0 8px;
+            color: #334155;
+            font-weight: bold;
+        }
+
+        /* Inputs */
+        .login-card input {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 7px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #1e293b;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .login-card input:focus {
+            border-color: #0b4f8a;
+            box-shadow: 0 0 0 3px rgba(11, 79, 138, 0.10);
+        }
+
+        /* Password */
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 50px;
+        }
+
+        .password-box button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #475569;
+            cursor: pointer;
+            font-size: 19px;
+        }
+
+        /* Login Button */
+        .login-btn {
+            width: 100%;
+            margin-top: 28px;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: #0b4f8a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #083b68;
+            transform: translateY(-2px);
+        }
+
+        /* Register */
+        .register-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #64748b;
+        }
+
+        .register-text a {
+            color: #0b4f8a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f4e79;
+            text-align: center;
+            padding: 18px;
+            color: white;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                justify-content: center;
+            }
+
+            nav h2 {
+                width: 100%;
+                text-align: center;
+                margin: 0 0 8px;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            .login-card {
+                padding: 35px 22px;
+            }
+
+            .login-card h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h2>CareerNest</h2>
+
+    <a href="/">Home</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/about">About</a>
+    <a href="/help">Help & Contact</a>
+    <a href="/register">Job Seeker</a>
+    <a href="/login">Login</a>
+</nav>
+
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h1>Job Seeker Login</h1>
+
+        <!-- Login Success Message -->
+        {% if login_success %}
+        <div class="success-message">
+            Login Successful!<br>
+            Welcome, {{ name }}.
+        </div>
+        {% endif %}
+
+
+        <p class="subtitle">
+            Welcome back! Login to your account and discover new job opportunities.
+        </p>
+
+
+        <form method="POST" action="/login">
+
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your registered email"
+                autocomplete="email"
+                required
+            >
+
+
+            <label for="password">Password</label>
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    id="toggleBtn"
+                    onclick="togglePassword()"
+                    aria-label="Show or hide password"
+                >
+                    👁
+                </button>
+
+            </div>
+
+
+            <button type="submit" class="login-btn">
+                Login to Account
+            </button>
+
+        </form>
+
+
+        <p class="register-text">
+            Don't have an account?
+            <a href="/register">Create a Job Seeker account</a>
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <p>© 2026 CareerNest | Help & Contact</p>
+</footer>
+
+
+<script>
+function togglePassword() {
+
+    const password = document.getElementById("password");
+    const toggleBtn = document.getElementById("toggleBtn");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+        toggleBtn.innerHTML = "🙈";
+
+    } else {
+
+        password.type = "password";
+        toggleBtn.innerHTML = "👁";
+
+    }
+}
+</script>
+
+</body>
+</html>

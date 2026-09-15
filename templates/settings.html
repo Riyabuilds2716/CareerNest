@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - CareerNest</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .settings-container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .settings-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .setting-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        }
+
+        .setting-card h3 {
+            margin: 0 0 8px 0;
+            color: #2f5f85;
+        }
+
+        .setting-card p {
+            margin: 0 0 12px 0;
+            color: #555;
+        }
+
+        .setting-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .setting-button {
+            display: inline-block;
+            padding: 9px 16px;
+            background: #2f5f85;
+            color: white !important;
+            border-radius: 6px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .setting-button:hover {
+            opacity: 0.9;
+        }
+
+        .setting-form {
+            margin-top: 10px;
+        }
+
+        .setting-form select,
+        .setting-form button {
+            padding: 9px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-right: 6px;
+        }
+
+        .setting-form button {
+            background: #2f5f85;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .setting-form button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+
+            .settings-container {
+                width: 90%;
+                margin: 25px auto;
+            }
+
+            .setting-card {
+                padding: 16px;
+            }
+
+            .setting-form select,
+            .setting-form button {
+                width: 100%;
+                margin: 5px 0;
+                box-sizing: border-box;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="{% if session.get('appearance') == 'Dark' %}dark-mode{% endif %}">
+
+
+    <nav>
+
+        <h2>CareerNest</h2>
+
+        <a href="/">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/about">About</a>
+        <a href="/help">Help & Contact</a>
+
+    </nav>
+
+
+    <div class="settings-container">
+
+        <h1>⚙️ Settings</h1>
+
+
+        <!-- EDIT PROFILE -->
+
+        <div class="setting-card">
+
+            <a href="/edit-profile">
+
+                <h3>👤 Edit Profile</h3>
+
+                <p>
+                    View and manage your profile information.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <!-- CHANGE PASSWORD -->
+
+        <div class="setting-card">
+
+            <h3>🔐 Change Password</h3>
+
+            <p>
+                Update your account password securely.
+            </p>
+
+            <a href="/change-password"
+               class="setting-button">
+
+                Change Password
+
+            </a>
+
+        </div>
+        <!-- LANGUAGE -->
+
+        <div class="setting-card">
+
+            <h3>🌐 Language</h3>
+
+            <p>
+                Select your preferred language.
+            </p>
+
+            <form action="/language"
+                  method="POST"
+                  class="setting-form">
+
+                <select name="language">
+
+                    <option value="English">English</option>
+
+                    <option value="Hindi">Hindi</option>
+
+                    <option value="Marathi">Marathi</option>
+
+                </select>
+
+                <button type="submit">
+                    Save Language
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- NOTIFICATION SETTINGS -->
+
+        <div class="setting-card">
+
+            <h3>🔔 Notification Settings</h3>
+
+            <p>
+                Manage your job and application notifications.
+            </p>
+
+            <a href="/notification-settings"
+               class="setting-button">
+
+                Manage Notifications
+
+            </a>
+
+        </div>
+
+
+        <!-- APPEARANCE -->
+
+        <div class="setting-card">
+
+            <h3>🎨 Appearance</h3>
+
+            <p>
+                Choose how the CareerNest looks.
+            </p>
+
+            <form action="/appearance"
+                  method="POST"
+                  class="setting-form">
+
+                <select name="appearance">
+
+                    <option value="Light">Light Mode</option>
+
+                    <option value="Dark">Dark Mode</option>
+
+                </select>
+
+                <button type="submit">
+                    Save Appearance
+                </button>
+
+            </form>
+
+        </div>
+        <!-- PRIVACY & SECURITY -->
+
+        <div class="setting-card">
+
+            <h3>🔒 Privacy & Security</h3>
+
+            <p>
+                Manage your account privacy and security options.
+            </p>
+
+            <a href="/privacy-security"
+               class="setting-button">
+
+                Privacy & Security
+
+            </a>
+
+        </div>
+
+
+        <!-- EMAIL PREFERENCES -->
+
+        <div class="setting-card">
+
+            <h3>📧 Email Preferences</h3>
+
+            <p>
+                Manage your email notification preferences.
+            </p>
+
+            <a href="/email-preferences"
+               class="setting-button">
+
+                Manage Email Preferences
+
+            </a>
+
+        </div>
+
+
+        <!-- HELP & SUPPORT -->
+
+        <div class="setting-card">
+
+            <a href="/help">
+
+                <h3>📞 Help & Support</h3>
+
+                <p>
+                    Get help and contact the CareerNest
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+    <footer>
+
+        <p>
+            © 2026 CareerNest|
+            <a href="/">Home</a> |
+            <a href="/jobs">Jobs</a> |
+            <a href="/about">About</a> |
+            <a href="/help">Help & Contact</a>
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

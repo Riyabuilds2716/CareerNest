@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Status Updated</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #1f4e79;
+            padding: 18px 40px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* SUCCESS CARD */
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .success-card {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 50px 35px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: #eaf2f8;
+            color: #1f4e79;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .success-card h1 {
+            color: #1f4e79;
+            margin-bottom: 15px;
+            font-size: 30px;
+        }
+
+        .success-card p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 25px;
+            background: #eaf2f8;
+            color: #1f4e79;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #1f4e79;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #163a5c;
+        }
+
+        .secondary {
+            border: 2px solid #1f4e79;
+            color: #1f4e79;
+            background: white;
+        }
+
+        .secondary:hover {
+            background: #eaf2f8;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #1f4e79;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 16px 20px;
+            }
+
+            nav h2 {
+                font-size: 20px;
+            }
+
+            .success-card {
+                padding: 40px 22px;
+            }
+
+            .success-card h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <h2>CareerNest</h2>
+
+        <a href="{{ url_for('manage_applications') }}">
+            Manage Applications
+        </a>
+
+    </nav>
+
+
+    <!-- SUCCESS CONTENT -->
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="icon">
+                ✓
+            </div>
+
+            <h1>
+                Application Status Updated
+            </h1>
+
+            <p>
+                The application status has been updated successfully.
+                The candidate's application record has been saved.
+            </p>
+
+            <div class="status">
+                Status: {{ status }}
+            </div>
+
+            <div class="buttons">
+
+                <a
+                    href="{{ url_for('manage_applications') }}"
+                    class="btn primary"
+                >
+                    Manage Applications
+                </a>
+
+                <a
+                    href="{{ url_for('admin') }}"
+                    class="btn secondary"
+                >
+                    Admin Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 CareerNest. All Rights Reserved.
+
+    </footer>
+
+</body>
+</html>

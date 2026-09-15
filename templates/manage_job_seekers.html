@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Job Seekers - CareerNest</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #0b2d4d;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 40px auto;
+            flex: 1;
+        }
+
+        /* HEADING */
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #0b2d4d;
+            margin: 0 0 8px 0;
+        }
+
+        .heading p {
+            color: #666;
+            margin: 0;
+        }
+
+        .dashboard-btn {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #0b2d4d;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .dashboard-btn:hover {
+            background: #16476f;
+        }
+
+        /* COUNT */
+
+        .count {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            color: #0b2d4d;
+            font-weight: bold;
+        }
+
+        /* TABLE */
+
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #0b2d4d;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: #f5f9fc;
+        }
+
+        /* ID */
+
+        .id {
+            font-weight: bold;
+            color: #0b2d4d;
+        }
+
+        /* NAME */
+
+        .name {
+            font-weight: bold;
+            color: #1f4e79;
+        }
+
+        /* SKILLS */
+
+        .skills {
+            max-width: 250px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            background: white;
+            text-align: center;
+            padding: 50px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .empty h3 {
+            color: #0b2d4d;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #777;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            background: #0b2d4d;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #16476f;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #0b2d4d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 16px 5%;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .navbar h2 {
+                font-size: 19px;
+            }
+
+            .navbar a {
+                margin: 0 6px;
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .heading {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dashboard-btn {
+                text-align: center;
+                width: 100%;
+            }
+
+            .table-container {
+                padding: 10px;
+            }
+
+            table {
+                min-width: 850px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navbar">
+
+        <h2>
+            CareerNest Admin
+        </h2>
+
+        <div>
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/manage-jobs">
+                Manage Jobs
+            </a>
+
+            <a href="/admin-logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+
+        <!-- HEADING -->
+
+        <div class="heading">
+
+            <div>
+
+                <h1>
+                    Manage Job Seekers
+                </h1>
+
+                <p>
+                    View registered job seekers and their details.
+                </p>
+
+            </div>
+
+            <a href="/admin" class="dashboard-btn">
+                Admin Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- COUNT -->
+
+        <div class="count">
+
+            Total Job Seekers:
+            {{ seekers|length }}
+
+        </div>
+
+
+        {% if seekers %}
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Full Name
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Qualification
+                        </th>
+
+                        <th>
+                            Skills
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for seeker in seekers %}
+
+                    <tr>
+
+                        <!-- ID -->
+
+                        <td class="id">
+                            {{ seeker[0] }}
+                        </td>
+
+
+                        <!-- FULL NAME -->
+
+                        <td class="name">
+                            {{ seeker[1] }}
+                        </td>
+
+
+                        <!-- EMAIL -->
+
+                        <td>
+                            {{ seeker[2] }}
+                        </td>
+
+
+                        <!-- PHONE -->
+
+                        <td>
+                            {{ seeker[3] }}
+                        </td>
+
+
+                        <!-- QUALIFICATION -->
+
+                        <td>
+                            {{ seeker[4] or "Not provided" }}
+                        </td>
+
+
+                        <!-- SKILLS -->
+
+                        <td class="skills">
+                            {{ seeker[5] or "Not provided" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- NO JOB SEEKERS -->
+
+        <div class="empty">
+
+            <h3>
+                No Job Seekers Found
+            </h3>
+
+            <p>
+                No registered job seekers are available yet.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+        <!-- BOTTOM BUTTONS -->
+
+        <div class="buttons">
+
+            <a href="/admin" class="btn">
+                Back to Dashboard
+            </a>
+
+            <a href="/admin-logout" class="btn">
+                Logout
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 CareerNest. All Rights Reserved.
+
+    </footer>
+
+
+</body>
+
+</html>
