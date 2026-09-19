@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Activity Dashboard - CareerNest</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #0b2d4d;
+        }
+
+        .navbar {
+            background: #0b2d4d;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .container h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #667085;
+            margin-bottom: 25px;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .activity-text {
+            font-weight: 600;
+        }
+
+        .activity-time {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            background: #0b2d4d;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            .activity-card {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>CareerNest</h2>
+
+        <div>
+            <a href="/admin">Dashboard</a>
+            <a href="/manage-jobs">Manage Jobs</a>
+            <a href="/admin-logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <h1>Activity Dashboard</h1>
+
+        <p class="subtitle">
+            Recent activities in CareerNest
+        </p>
+
+        {% if activities %}
+
+            {% for activity in activities %}
+
+                <div class="activity-card">
+
+                    <div class="activity-text">
+                        {{ activity[0] }}
+                    </div>
+
+                    <div class="activity-time">
+                        {{ activity[1] }}
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                <h3>No activities yet</h3>
+                <p>Activities will appear here when actions are performed.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <footer>
+        © 2026 CareerNest. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

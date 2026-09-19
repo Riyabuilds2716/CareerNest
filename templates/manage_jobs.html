@@ -107,9 +107,11 @@
 
         .job-card {
             background: white;
-            padding: 24px;
+            padding: 22px 28px;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            width:100%;
+            box-sizing: border-box;
         }
 
         .job-card h2 {
@@ -295,8 +297,75 @@
 
                 </div>
 
+                <!-- Approval Status --->
+                <div style="margin-bottom: 20px; font-size: 14px;">
+                    {% if job[7] == 1 %}
+                 <div style="margin-bottom: 10px;">
+                 <strong style="color: #856404;">
+                 🚩 Flagged
+                </strong>
+                </div>
+                    {% endif %}  
+                    <strong>Approval Status:</strong>
+
+                    {% if job[6] == "Approved" %}
+                        <span style="color: green; font-weight: bold;">
+                            ✓ Approved
+                        </span>
+
+                    {% elif job[6] == "Rejected" %}
+                        <span style="color: #b42318; font-weight: bold;">
+                            ✕ Rejected
+                        </span>
+
+                    {% else %}
+                        <span style="color: #b26a00; font-weight: bold;">
+                            ⏳ Pending
+                        </span>
+                    {% endif %}
+                </div>
+
                 <!-- Actions -->
                 <div class="actions">
+
+                    <form
+                        method="POST"
+                        action="/update-job-approval/{{ job[0] }}"
+                        style="display:inline;"
+                    >
+                        <input
+                            type="hidden"
+                            name="approval_status"
+                            value="Approved"
+                        >
+                        <button
+                            type="submit"
+                            class="btn"
+                            style="background:#d1fae5; color:#047857; border:none; cursor:pointer;"
+                        >
+                            ✓ Approve
+                        </button>
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="/update-job-approval/{{ job[0] }}"
+                        style="display:inline;"
+                    >
+                        <input
+                            type="hidden"
+                            name="approval_status"
+                            value="Rejected"
+                        >
+
+                        <button
+                            type="submit"
+                            class="btn"
+                            style="background:#fde8e8; color:#b42318; border:none; cursor:pointer;"
+                        >
+                            ✕ Reject
+                        </button>
+                    </form>
 
                     <a
                         href="/view-job/{{ job[0] }}"
@@ -312,6 +381,19 @@
                         Edit
                     </a>
 
+                   <form
+                        method="POST"
+                        action="/flag-job/{{ job[0] }}"
+                        style="display:inline;"
+                    >
+                        <button
+                            type="submit"
+                            class="btn"
+                            style="background:#fff3cd; color:#856404; border:none; cursor:pointer;"
+                        >
+                            🚩 Flag
+                        </button>
+                    </form>
                     <form
                         method="GET"
                         action="/delete-job/{{ job[0] }}"
@@ -348,12 +430,14 @@
 
         </div>
 
-        {% endif %}
-
     </div>
-    <footer>
-        © 2026 CareerNest. All Rights Reserved.
-    </footer>
+
+{% endif %}
+
+<footer>
+    © 2026 CareerNest. All Rights Reserved.
+</footer>
 
 </body>
 </html>
+                    

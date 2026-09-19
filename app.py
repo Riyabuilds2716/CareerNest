@@ -131,6 +131,31 @@ def init_db():
             description TEXT
         )
     """)
+    cursor.execute("PRAGMA table_info(jobs)")
+    columns = [column[1] for column in cursor.fetchall()]
+
+
+    if "approval_status" not in columns:
+        cursor.execute(
+            "ALTER TABLE jobs ADD COLUMN approval_status TEXT DEFAULT 'Approved'"
+        )
+    if "is_flagged" not in columns:
+         cursor.execute(
+        "ALTER TABLE jobs ADD COLUMN is_flagged INTEGER DEFAULT 0"
+    )
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS employers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            company_name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            phone TEXT NOT NULL,
+            address TEXT,
+            created_at TEXT
+        )
+    """)
+    
+
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS applications (
@@ -166,10 +191,42 @@ def init_db():
             message TEXT NOT NULL
         )
     """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS activities (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            activity TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
 
     conn.commit()
     conn.close()
     # =========================================================
+# ACTIVITY LOGGER
+# =========================================================
+
+def log_activity(activity):
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    from datetime import datetime
+
+    cursor.execute("""
+        INSERT INTO activities (
+            activity,
+            created_at
+        )
+        VALUES (?, ?)
+    """, (
+        activity,
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ))
+
+    conn.commit()
+    conn.close()
+
+ # =========================================================
 # SEED ORIGINAL JOBS
 # =========================================================
 
@@ -921,13 +978,13 @@ def logout():
     "/apply/<job_name>",
     methods=["GET", "POST"]
 )
+
 def apply(job_name):
 
-    # IMPORTANT:
-    # Apply is protected for logged-in job seekers.
-
-    
-    
+    if not session.get("job_seeker_logged_in"):
+        return redirect(
+            url_for("login")
+        )
 
     if request.method == "POST":
 
@@ -1034,11 +1091,8 @@ def admin_login():
         username = request.form["username"]
         password = request.form["password"]
 
-        if (
-            username == "admin"
-            and password == "admin123"
-        ):
 
+        if username == "admin" and password == "admin2701":
             session["admin_logged_in"] = True
 
             return render_template(
@@ -1113,9 +1167,19 @@ def admin():
     total_job_seekers = cursor.fetchone()[0]
 
     cursor.execute(
+        "SELECT COUNT(*) FROM employers"
+    )
+    total_employers = cursor.fetchone()[0]
+
+    cursor.execute(
         "SELECT COUNT(*) FROM messages"
     )
     total_messages = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM activities"
+    )
+    total_activities = cursor.fetchone()[0]
 
     conn.close()
 
@@ -1124,8 +1188,45 @@ def admin():
         total_jobs=total_jobs,
         total_applications=total_applications,
         total_job_seekers=total_job_seekers,
-        total_messages=total_messages
+        total_messages=total_messages,
+        total_employers=total_employers,
+        total_activities=total_activities
     )
+# =========================================================
+# ACTIVITY DASHBOARD
+# =========================================================
+
+@app.route("/activity-dashboard")
+def activity_dashboard():
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            activity,
+            created_at
+        FROM activities
+        ORDER BY id DESC
+        LIMIT 20
+    """)
+
+    activities = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "activity_dashboard.html",
+        activities=activities
+    )
+
+
+
 
 
 # =========================================================
@@ -1167,7 +1268,9 @@ def manage_jobs():
             company,
             location,
             skills,
-            description
+            description,
+            approval_status,
+            is_flagged
         FROM jobs
         ORDER BY id DESC
     """)
@@ -1215,23 +1318,26 @@ def add_job():
                 company,
                 location,
                 skills,
-                description
+                description,
+                approval_status
             )
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (
             name,
             company,
             location,
             skills,
-            description
+            description,
+            "Pending"
         ))
 
         conn.commit()
         conn.close()
 
-        return render_template(
-            "add_job_success.html",
-            job_name=name
+        log_activity("Admin added a new job")
+
+        return redirect(
+            url_for("manage_jobs")
         )
 
     return render_template(
@@ -1396,6 +1502,54 @@ def manage_applications():
         "manage_applications.html",
         applications=applications
     )
+# =========================================================
+# FLAG / UNFLAG JOB
+# =========================================================
+
+@app.route("/flag-job/<int:job_id>", methods=["POST"])
+def flag_job(job_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+    
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT is_flagged
+        FROM jobs
+        WHERE id = ?
+    """, (job_id,))
+
+    job = cursor.fetchone()
+
+    if job is None:
+        conn.close()
+        return "Job not found.", 404
+
+    current_status = job[0]
+
+    if current_status == 1:
+        new_status = 0
+    else:
+        new_status = 1
+
+    cursor.execute("""
+        UPDATE jobs
+        SET is_flagged = ?
+        WHERE id = ?
+    """, (new_status, job_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(
+        url_for("manage_jobs")
+    )
+
 
 
 # =========================================================
@@ -1447,7 +1601,88 @@ def update_application_status(application_id):
         status=status
     )
 # =========================================================
-# MANAGE JOB SEEKERS
+# UPDATE JOB APPROVAL STATUS
+# =========================================================
+
+@app.route(
+    "/update-job-approval/<int:job_id>",
+    methods=["POST"]
+)
+def update_job_approval(job_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    approval_status = request.form.get(
+        "approval_status"
+    )
+
+    allowed_statuses = [
+        "Approved",
+        "Rejected"
+    ]
+
+    if approval_status not in allowed_statuses:
+        return "Invalid approval status.", 400
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE jobs
+        SET approval_status = ?
+        WHERE id = ?
+    """, (
+        approval_status,
+        job_id
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(
+        url_for("manage_jobs")
+    )
+    if "is_flagged" not in columns:
+      cursor.execute(
+        "ALTER TABLE jobs ADD COLUMN is_flagged INTEGER DEFAULT 0"
+    )
+
+@app.route("/manage-employers")
+def manage_employers():
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            company_name,
+            email,
+            phone,
+            address,
+            created_at
+        FROM employers
+        ORDER BY id DESC
+    """)
+
+    employers = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "manage_employers.html",
+        employers=employers
+    )
+# =========================================================
+# ADMIN - MANAGE JOB SEEKERS
 # =========================================================
 
 @app.route("/manage-job-seekers")
@@ -1481,6 +1716,279 @@ def manage_job_seekers():
         "manage_job_seekers.html",
         seekers=seekers
     )
+# =========================================================
+# EDIT JOB SEEKER
+# =========================================================
+
+@app.route("/edit-job-seeker/<int:seeker_id>", methods=["GET", "POST"])
+def edit_job_seeker(seeker_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+
+        full_name = request.form["full_name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        qualification = request.form["qualification"]
+        skills = request.form["skills"]
+
+        cursor.execute("""
+            UPDATE job_seekers
+            SET
+                full_name = ?,
+                email = ?,
+                phone = ?,
+                qualification = ?,
+                skills = ?
+            WHERE id = ?
+        """, (
+            full_name,
+            email,
+            phone,
+            qualification,
+            skills,
+            seeker_id
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(
+            url_for("manage_job_seekers")
+        )
+
+    cursor.execute("""
+        SELECT
+            id,
+            full_name,
+            email,
+            phone,
+            qualification,
+            skills
+        FROM job_seekers
+        WHERE id = ?
+    """, (seeker_id,))
+
+    seeker = cursor.fetchone()
+
+    conn.close()
+
+    if not seeker:
+        return "Job seeker not found.", 404
+
+    return render_template(
+        "edit_job_seeker.html",
+        seeker=seeker
+    )
+
+
+# =========================================================
+# DELETE JOB SEEKER
+# =========================================================
+
+@app.route("/delete-job-seeker/<int:seeker_id>", methods=["POST"])
+def delete_job_seeker(seeker_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM job_seekers
+        WHERE id = ?
+    """, (seeker_id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(
+        url_for("manage_job_seekers")
+    )
+# =========================================================
+# VIEW EMPLOYER
+# =========================================================
+
+@app.route("/view-employer/<int:employer_id>")
+def view_employer(employer_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            company_name,
+            email,
+            phone,
+            address,
+            created_at
+        FROM employers
+        WHERE id = ?
+    """, (employer_id,))
+
+    employer = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        "view_employer.html",
+        employer=employer
+    )
+@app.route("/add-employer", methods=["GET", "POST"])
+def add_employer():
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    if request.method == "POST":
+
+        company_name = request.form["company_name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        address = request.form["address"]
+
+        conn = sqlite3.connect("jobportal.db")
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            INSERT INTO employers
+            (
+                company_name,
+                email,
+                phone,
+                address,
+                created_at
+            )
+            VALUES (?, ?, ?, ?, datetime('now'))
+        """, (
+            company_name,
+            email,
+            phone,
+            address
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(
+            url_for("manage_employers")
+        )
+
+    return render_template(
+        "add_employer.html"
+    )
+# =========================================================
+# EDIT EMPLOYER
+# =========================================================
+
+@app.route("/edit-employer/<int:employer_id>", methods=["GET", "POST"])
+def edit_employer(employer_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+
+        company_name = request.form["company_name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        address = request.form["address"]
+
+        cursor.execute("""
+            UPDATE employers
+            SET
+                company_name = ?,
+                email = ?,
+                phone = ?,
+                address = ?
+            WHERE id = ?
+        """, (
+            company_name,
+            email,
+            phone,
+            address,
+            employer_id
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(
+            url_for("manage_employers")
+        )
+
+    cursor.execute("""
+        SELECT
+            id,
+            company_name,
+            email,
+            phone,
+            address,
+            created_at
+        FROM employers
+        WHERE id = ?
+    """, (employer_id,))
+
+    employer = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        "edit_employer.html",
+        employer=employer
+    )
+    # =========================================================
+# DELETE EMPLOYER
+# =========================================================
+
+@app.route("/delete-employer/<int:employer_id>")
+def delete_employer(employer_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(
+            url_for("admin_login")
+        )
+
+    conn = sqlite3.connect("jobportal.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM employers
+        WHERE id = ?
+    """, (employer_id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(
+        url_for("manage_employers")
+    )
+
+
+
 
 
 # =========================================================
@@ -2171,7 +2679,6 @@ def api_jobs():
 
     return jsonify(jobs_data)
 
-
 # =========================================================
 # API - SEARCH JOBS
 # =========================================================
@@ -2279,6 +2786,11 @@ def api_single_job(job_id):
 @app.route("/api/applications")
 def api_applications():
 
+    if not session.get("admin_logged_in"):
+        return jsonify({
+            "error": "Unauthorized access"
+        }), 401
+
     conn = sqlite3.connect("jobportal.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -2318,13 +2830,17 @@ def api_applications():
 
     return jsonify(applications_data)
 
-
 # =========================================================
 # API - ALL JOB SEEKERS
 # =========================================================
 
 @app.route("/api/job-seekers")
 def api_job_seekers():
+
+    if not session.get("admin_logged_in"):
+        return jsonify({
+            "error": "Unauthorized access"
+        }), 401
 
     conn = sqlite3.connect("jobportal.db")
     conn.row_factory = sqlite3.Row
@@ -2360,14 +2876,17 @@ def api_job_seekers():
         })
 
     return jsonify(seekers_data)
-
-
 # =========================================================
-# API - ALL CONTACT MESSAGES
+# API - ALL MESSAGES
 # =========================================================
 
 @app.route("/api/messages")
 def api_messages():
+
+    if not session.get("admin_logged_in"):
+        return jsonify({
+            "error": "Unauthorized access"
+        }), 401
 
     conn = sqlite3.connect("jobportal.db")
     conn.row_factory = sqlite3.Row
@@ -2381,7 +2900,7 @@ def api_messages():
             subject,
             message
         FROM messages
-        ORDER BY id
+        ORDER BY id DESC
     """)
 
     messages = cursor.fetchall()
@@ -2400,8 +2919,11 @@ def api_messages():
             "message": message["message"]
         })
 
-    return jsonify(messages_data)
-
+    return jsonify({
+        "success": True,
+        "count": len(messages_data),
+        "messages": messages_data
+    })
 
 # =========================================================
 # RUN APPLICATION
